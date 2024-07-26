@@ -1,0 +1,111 @@
+[
+    {
+        "id": "d1e1d7a7.1bc318",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e76b31d3.1d7cb",
+        "type": "ui_button",
+        "z": "d1e1d7a7.1bc318",
+        "name": "",
+        "group": "b7aa4a8e.9ad728",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Set Servo to 90",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "90",
+        "payloadType": "num",
+        "topic": "servo/position",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "c9203d1e.3fda2"
+            ]
+        ]
+    },
+    {
+        "id": "c9203d1e.3fda2",
+        "type": "mqtt out",
+        "z": "d1e1d7a7.1bc318",
+        "name": "",
+        "topic": "servo/position",
+        "qos": "",
+        "retain": "",
+        "broker": "ea2c16d5.fbe6a",
+        "x": 370,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f2e9bc19.3f9ae",
+        "type": "ui_button",
+        "z": "d1e1d7a7.1bc318",
+        "name": "",
+        "group": "b7aa4a8e.9ad728",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Set Servo to 0",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "0",
+        "payloadType": "num",
+        "topic": "servo/position",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "c9203d1e.3fda2"
+            ]
+        ]
+    },
+    {
+        "id": "b7aa4a8e.9ad728",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "7686d4e0.b3a9ec",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "7686d4e0.b3a9ec",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "ea2c16d5.fbe6a",
+        "type": "mqtt-broker",
+        "name": "test.mosquitto.org",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
