@@ -1,111 +1,412 @@
 [
     {
-        "id": "d1e1d7a7.1bc318",
+        "id": "0fac9e4c434de174",
         "type": "tab",
         "label": "Flow 2",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "e76b31d3.1d7cb",
-        "type": "ui_button",
-        "z": "d1e1d7a7.1bc318",
+        "id": "cfae89420d765efe",
+        "type": "inject",
+        "z": "0fac9e4c434de174",
         "name": "",
-        "group": "b7aa4a8e.9ad728",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"angle\":90}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "4009343e4a725e02"
+            ]
+        ]
+    },
+    {
+        "id": "4009343e4a725e02",
+        "type": "function",
+        "z": "0fac9e4c434de174",
+        "name": "Set Angle URL",
+        "func": "msg.payload = null;\nmsg.url = \"http://172.20.10.2/?angle=90\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "bfb36216e72e11c8"
+            ]
+        ]
+    },
+    {
+        "id": "bfb36216e72e11c8",
+        "type": "http request",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "36bc362d20a5702d"
+            ]
+        ]
+    },
+    {
+        "id": "36bc362d20a5702d",
+        "type": "function",
+        "z": "0fac9e4c434de174",
+        "name": "Get Angle URL",
+        "func": "msg.payload = null;\nmsg.url = \"http://172.20.10.2/angle\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "b92c88d9a9bd2d97"
+            ]
+        ]
+    },
+    {
+        "id": "b92c88d9a9bd2d97",
+        "type": "http request",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1050,
+        "y": 260,
+        "wires": [
+            [
+                "fb98a53a8437fa7d"
+            ]
+        ]
+    },
+    {
+        "id": "fb98a53a8437fa7d",
+        "type": "function",
+        "z": "0fac9e4c434de174",
+        "name": "Process Angle",
+        "func": "msg.payload = Number(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1250,
+        "y": 260,
+        "wires": [
+            [
+                "dda9d6918459a9f3",
+                "c32ffcfc521d8cf3"
+            ]
+        ]
+    },
+    {
+        "id": "dda9d6918459a9f3",
+        "type": "ui_gauge",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "group": "51b6988ee22845df",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Servo Angle",
+        "label": "degrees",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 180,
+        "colors": [
+            "#d28de5",
+            "#b56ec9",
+            "#a04eb7"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1450,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c32ffcfc521d8cf3",
+        "type": "debug",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f918a00d933ef504",
+        "type": "ui_button",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "group": "51b6988ee22845df",
         "order": 0,
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "Set Servo to 90",
+        "label": "Rotate",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
+        "className": "",
         "icon": "",
-        "payload": "90",
-        "payloadType": "num",
-        "topic": "servo/position",
-        "x": 150,
-        "y": 100,
+        "payload": "{\"angle\":90}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 310,
+        "y": 200,
         "wires": [
             [
-                "c9203d1e.3fda2"
+                "4009343e4a725e02"
             ]
         ]
     },
     {
-        "id": "c9203d1e.3fda2",
-        "type": "mqtt out",
-        "z": "d1e1d7a7.1bc318",
-        "name": "",
-        "topic": "servo/position",
-        "qos": "",
-        "retain": "",
-        "broker": "ea2c16d5.fbe6a",
-        "x": 370,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "f2e9bc19.3f9ae",
+        "id": "92b2d2050651d1cd",
         "type": "ui_button",
-        "z": "d1e1d7a7.1bc318",
+        "z": "0fac9e4c434de174",
         "name": "",
-        "group": "b7aa4a8e.9ad728",
+        "group": "51b6988ee22845df",
         "order": 1,
         "width": 0,
         "height": 0,
         "passthru": false,
-        "label": "Set Servo to 0",
+        "label": "LED ON",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
+        "className": "",
         "icon": "",
-        "payload": "0",
-        "payloadType": "num",
-        "topic": "servo/position",
-        "x": 150,
-        "y": 160,
+        "payload": "{\"state\":\"on\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 310,
+        "y": 300,
         "wires": [
             [
-                "c9203d1e.3fda2"
+                "f7377cc03a3cc1e1"
             ]
         ]
     },
     {
-        "id": "b7aa4a8e.9ad728",
+        "id": "4333fd61e237f013",
+        "type": "ui_button",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "group": "51b6988ee22845df",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "LED OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"state\":\"off\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "f7377cc03a3cc1e1"
+            ]
+        ]
+    },
+    {
+        "id": "f7377cc03a3cc1e1",
+        "type": "function",
+        "z": "0fac9e4c434de174",
+        "name": "Set LED State URL",
+        "func": "var state = msg.payload.state;\nmsg.payload = null;\nmsg.url = \"http://172.20.10.2/led?state=\" + state;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "71586abab268311f"
+            ]
+        ]
+    },
+    {
+        "id": "71586abab268311f",
+        "type": "http request",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 700,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "785e352aa3caf597",
+        "type": "http in",
+        "z": "0fac9e4c434de174",
+        "name": "",
+        "url": "/ledState",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "d55de5622e4b6722"
+            ]
+        ]
+    },
+    {
+        "id": "d55de5622e4b6722",
+        "type": "function",
+        "z": "0fac9e4c434de174",
+        "name": "Process LED State",
+        "func": "var state = msg.req.query.state;\nmsg.payload = state;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "92cc847563c89c58"
+            ]
+        ]
+    },
+    {
+        "id": "92cc847563c89c58",
+        "type": "ui_text",
+        "z": "0fac9e4c434de174",
+        "group": "51b6988ee22845df",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "LED State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 550,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1467d504b14ed997",
+        "type": "remote-access",
+        "z": "0fac9e4c434de174",
+        "confignode": "68a770f215c13ee2",
+        "name": "",
+        "verbose": 0,
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "51b6988ee22845df",
         "type": "ui_group",
-        "name": "Default",
-        "tab": "7686d4e0.b3a9ec",
+        "name": "Angle Control",
+        "tab": "f43a2ecbae52463a",
         "order": 1,
         "disp": true,
         "width": "6",
-        "collapse": false
+        "collapse": false,
+        "className": ""
     },
     {
-        "id": "7686d4e0.b3a9ec",
+        "id": "68a770f215c13ee2",
+        "type": "remote-config",
+        "name": "Node-RED eo",
+        "host": "localhost",
+        "protocol": "http",
+        "port": "1880",
+        "baseurl": "/ui",
+        "instancehash": "lm5wnr3n1oit5cobqwjpph1zljqcggmj797hy5kculpctdlpbl5ezoqnw6yznmd6",
+        "server": "nodered04.remote-red.com",
+        "region": "de"
+    },
+    {
+        "id": "f43a2ecbae52463a",
         "type": "ui_tab",
         "name": "Home",
         "icon": "dashboard",
-        "order": 1
-    },
-    {
-        "id": "ea2c16d5.fbe6a",
-        "type": "mqtt-broker",
-        "name": "test.mosquitto.org",
-        "broker": "test.mosquitto.org",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "closeTopic": "",
-        "closePayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
+        "disabled": false,
+        "hidden": false
     }
 ]
